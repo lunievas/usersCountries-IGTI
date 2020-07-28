@@ -1,6 +1,7 @@
 let globalUsers = [];
 let globalCountries = [];
 let globalUsersCountries = [];
+let globalFilteredUserCountries = [];
 
 
 async function start(){
@@ -25,6 +26,8 @@ async function start(){
     hideSpinner ();
     mergeUsersAndCountries ();
     render ();
+
+    enableFilter();
 }
 
 
@@ -36,7 +39,7 @@ function promiseUsers(){
         setTimeout(() => {
             console.log('promiseUser resolvida')
             resolve();
-        }, 5000);
+        }, 1000);
 
     });
 }
@@ -47,7 +50,7 @@ function promiseCountries(){
         setTimeout(() => {
             console.log('promiseCountries resolvida')
             resolve();
-        }, 7000);
+        }, 2000);
 
     });
 }
@@ -100,10 +103,12 @@ function mergeUsersAndCountries(){
             ...user, 
             countryName,
             countryFlag
-        })
+        });
     });
 
-    console.log(globalUsersCountries)
+    globalFilteredUserCountries = [...globalUsersCountries];
+
+
 
 }
 
@@ -113,7 +118,7 @@ function render(){
 
     divUser.innerHTML = `
         <div class='row'>
-            ${globalUsersCountries.map(({countryFlag,userPicture,userName,countryName})=>{
+            ${globalFilteredUserCountries.map(({countryFlag,userPicture,userName,countryName})=>{
                 return`
                 <div class='col s6 m4 l3'>
                     <div class='flex-row bordered'>
@@ -131,6 +136,25 @@ function render(){
         </div>
     `
 };
+
+function enableFilter(){
+    const buttonFilter = document.querySelector('#buttonFilter');
+    
+    buttonFilter.addEventListener('click', handleFilter);
+}
+
+function handleFilter(){
+    const inputFilter = document.querySelector('#inputFilter');
+
+    const filterValue = inputFilter.value.trim().toLowerCase();
+
+    globalFilteredUserCountries = globalUsersCountries.filter(item =>{
+        return item.userName.toLowerCase().includes(filterValue);
+    });
+
+    render();
+
+}
 
 
 
