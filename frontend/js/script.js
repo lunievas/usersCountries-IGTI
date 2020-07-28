@@ -106,6 +106,9 @@ function mergeUsersAndCountries(){
         });
     });
 
+    globalUsersCountries.sort((a,b) => a.userName.localeCompare(b.userName));
+
+
     globalFilteredUserCountries = [...globalUsersCountries];
 
 
