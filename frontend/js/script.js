@@ -142,8 +142,19 @@ function render(){
 
 function enableFilter(){
     const buttonFilter = document.querySelector('#buttonFilter');
+    const inputFilter = document.querySelector('#inputFilter');
     
     buttonFilter.addEventListener('click', handleFilter);
+    inputFilter.addEventListener('keyup', handleKeyUp);
+}
+
+function handleKeyUp(event){
+    const {key} = event;
+
+    // if(key !== 'Enter'){
+    //     return;
+    // }
+        handleFilter();
 }
 
 function handleFilter(){
