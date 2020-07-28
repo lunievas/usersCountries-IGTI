@@ -8,9 +8,8 @@ async function start(){
    await fetchUsers ();
    await fetchCountries ();
 
-   console.log(globalCountries)
    
-    // hideSpinner ();
+    hideSpinner ();
     // mergeUsersAndCountries ();
     // render ();
 }
@@ -42,6 +41,10 @@ async function fetchCountries(){
     });
 
 
+}
+
+function hideSpinner(){
+    document.querySelector('#spinner').classList.add('hide');
 }
 
 
