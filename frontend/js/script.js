@@ -86,7 +86,7 @@ function render(){
                 </div>
                 `;
 
-            })}
+            }).join('')}
         </div>
     
     `
