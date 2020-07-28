@@ -11,7 +11,7 @@ async function start(){
    
     hideSpinner ();
     mergeUsersAndCountries ();
-    // render ();
+    render ();
 }
 
 async function fetchUsers(){
@@ -64,6 +64,32 @@ function mergeUsersAndCountries(){
 
     console.log(globalUsersCountries)
 
+}
+
+function render(){
+    const divUser = document.querySelector('#users');
+
+
+    divUser.innerHTML = `
+        <div class='row'>
+            ${globalUsersCountries.map(({countryFlag,userPicture,userName,countryName})=>{
+                return`
+                <div class='col s6 m4 l3'>
+                    <div class='flex-row bordered'>
+                        <img class='avatar' src='${userPicture}' alt='${userName}'/>
+
+                        <div class='flex-column'>
+                        <span> ${userName}</span>
+                        <img class='flag' src='${countryFlag}' alt='${countryName}'>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+            })}
+        </div>
+    
+    `
 }
 
 start();
