@@ -5,14 +5,36 @@ let globalUsersCountries = [];
 
 async function start(){
     
-   await fetchUsers ();
-   await fetchCountries ();
+//    await fetchUsers ();
+//    await fetchCountries ();
+    await promiseUsers();
+    await promiseCountries();
+    
 
-   
+
+
     hideSpinner ();
     mergeUsersAndCountries ();
     render ();
 }
+
+function promiseUsers(){
+    return new Promise(async(resolve, reject) =>{
+        await fetchUsers();
+        resolve();
+
+    });
+}
+function promiseCountries(){
+    return new Promise(async(resolve, reject) =>{
+        await fetchCountries();
+        resolve();
+
+    });
+}
+
+
+
 
 async function fetchUsers(){
     const res = await fetch ('http://localhost:3002/users');
@@ -88,8 +110,9 @@ function render(){
 
             }).join('')}
         </div>
-    
     `
-}
+};
+
+
 
 start();
