@@ -8,7 +8,7 @@ async function start(){
    await fetchUsers ();
    await fetchCountries ();
 
-   console.log(globalUsers)
+   console.log(globalCountries)
    
     // hideSpinner ();
     // mergeUsersAndCountries ();
@@ -24,6 +24,20 @@ async function fetchUsers(){
             userCountry: nat,
             userName: name.first,
             userPicture: picture.large,
+        };
+    });
+
+
+}
+
+async function fetchCountries(){
+    const res = await fetch ('http://localhost:3001/countries');
+    const json = await res.json();
+    globalCountries = json.map(({name, flag, alpha2Code}) =>{
+        return {
+             countryiD: alpha2Code,
+             countryName: name,
+             countryFlag: flag,
         };
     });
 
