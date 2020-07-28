@@ -10,7 +10,7 @@ async function start(){
 
    
     hideSpinner ();
-    // mergeUsersAndCountries ();
+    mergeUsersAndCountries ();
     // render ();
 }
 
@@ -34,7 +34,7 @@ async function fetchCountries(){
     const json = await res.json();
     globalCountries = json.map(({name, flag, alpha2Code}) =>{
         return {
-             countryiD: alpha2Code,
+             countryId: alpha2Code,
              countryName: name,
              countryFlag: flag,
         };
@@ -47,5 +47,23 @@ function hideSpinner(){
     document.querySelector('#spinner').classList.add('hide');
 }
 
+function mergeUsersAndCountries(){
+    globalUsersCountries = [];
+
+    globalUsers.forEach(user =>{
+        const country = globalCountries.find((country) => country.countryId === user.userCountry);
+
+        const {countryName, countryFlag} = country;
+
+        globalUsersCountries.push({
+            ...user, 
+            countryName,
+            countryFlag
+        })
+    });
+
+    console.log(globalUsersCountries)
+
+}
 
 start();
