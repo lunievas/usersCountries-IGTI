@@ -9,11 +9,17 @@ async function start(){
 //    await fetchCountries ();
 
     //MEIO DA AULA
-    console.time('medição');
-    await promiseUsers();
-    await promiseCountries();
-    console.timeEnd('medição');
+    // console.time('medição');
+    // await promiseUsers();
+    // await promiseCountries();
+    // console.timeEnd('medição');
     
+    //FIM DA AULA
+    console.time('promiseAll')
+    const p1 = promiseUsers();
+    const p2 = promiseCountries();
+    await Promise.all([p1,p2]);
+    console.timeEnd('promiseAll')
 
 
     hideSpinner ();
@@ -28,6 +34,7 @@ function promiseUsers(){
         await fetchUsers();
 
         setTimeout(() => {
+            console.log('promiseUser resolvida')
             resolve();
         }, 5000);
 
@@ -38,7 +45,7 @@ function promiseCountries(){
         await fetchCountries();
 
         setTimeout(() => {
-            
+            console.log('promiseCountries resolvida')
             resolve();
         }, 7000);
 
