@@ -4,13 +4,16 @@ let globalUsersCountries = [];
 
 
 async function start(){
-    
+    //INICIO DA
 //    await fetchUsers ();
 //    await fetchCountries ();
+
+    //MEIO DA AULA
+    console.time('medição');
     await promiseUsers();
     await promiseCountries();
+    console.timeEnd('medição');
     
-
 
 
     hideSpinner ();
@@ -18,17 +21,26 @@ async function start(){
     render ();
 }
 
+
+
 function promiseUsers(){
     return new Promise(async(resolve, reject) =>{
         await fetchUsers();
-        resolve();
+
+        setTimeout(() => {
+            resolve();
+        }, 5000);
 
     });
 }
 function promiseCountries(){
     return new Promise(async(resolve, reject) =>{
         await fetchCountries();
-        resolve();
+
+        setTimeout(() => {
+            
+            resolve();
+        }, 7000);
 
     });
 }
